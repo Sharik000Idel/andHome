@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IdelProject_list">
-        <activity android:name=".TittleActivity"></activity>
+        <activity
+            android:name=".Add_New_Prod"
+            android:exported="false" />
+        <activity android:name=".TittleActivity" />
         <activity android:name=".CatalogActivity" />
         <activity
             android:name=".activity_list_view_with_adapter"

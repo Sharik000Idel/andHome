@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.idelproject_list.CastAdapter.CastRacyclerAdapter;
@@ -16,6 +18,7 @@ public class CatalogActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     static CastRacyclerAdapter adapter;
+    Button b_add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class CatalogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_catalog);
 
         recyclerView = findViewById(R.id.recyclerView);
+        b_add = findViewById(R.id.button_add_k);
+
 
         ArrayList<Product> products = new ArrayList<>();
         products.add(  new Product( "Кепка"    , 20.2  , colors_added () , size_added(), R.drawable.idel_project_item1 , "Супер кепка"   ));
@@ -44,6 +49,15 @@ public class CatalogActivity extends AppCompatActivity {
         lln.setOrientation( LinearLayoutManager.VERTICAL );
         recyclerView.setLayoutManager(lln);
         recyclerView.setAdapter(adapter);
+
+        b_add.setOnClickListener(view -> {
+
+            Intent intent = new Intent( this , Add_New_Prod.class);
+            startActivity(intent);
+
+
+        });
+
     }
 
     public ArrayList<String> colors_added (){
