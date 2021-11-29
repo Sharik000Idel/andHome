@@ -9,12 +9,12 @@ public class Product implements Serializable {
 
     private String name_tovar;
     private double price;
-    private List<String> color_tovar;
+    private String color_tovar;
     private List<String> size_tovar;
     private int image_tovar;
 
 
-    public Product(String name_tovar,double price, List<String> color_tovar, List<String> size_tovar, int image_tovar ,String description) {
+    public Product(String name_tovar,double price, String color_tovar, List<String> size_tovar, int image_tovar ,String description) {
         this.price = price;
         this.name_tovar = name_tovar;
         this.color_tovar = color_tovar;
@@ -50,11 +50,11 @@ public class Product implements Serializable {
         this.name_tovar = name_tovar;
     }
 
-    public List<String> getColor_tovar() {
+    public String getColor_tovar() {
         return color_tovar;
     }
 
-    public void setColor_tovar(List<String> color_tovar) {
+    public void setColor_tovar(String color_tovar) {
         this.color_tovar = color_tovar;
     }
 
