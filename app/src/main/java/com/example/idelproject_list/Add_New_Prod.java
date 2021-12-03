@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,6 +41,8 @@ public class Add_New_Prod extends AppCompatActivity {
 
     ArrayAdapter<String> adapter_size , adapter_color;
 
+    ArrayList<Product> products =new ArrayList<Product>();
+
     ArrayList<String> size = new ArrayList<String>();
     ArrayList<String> color = new ArrayList<String>();
 
@@ -55,6 +58,10 @@ public class Add_New_Prod extends AppCompatActivity {
         tv_write_size = findViewById(R.id.sixe_text);
         name_adder_prod = findViewById(R.id.editText);
         image_adder_foto = findViewById(R.id.image_adder);
+
+
+
+
 
         Collections.addAll(size , "XS" , "S" , "M" , "L" , "XL" );
         Collections.addAll(color , "Red" , "Black" , "Grey" , "green" , "Yellow" );
@@ -79,7 +86,15 @@ public class Add_New_Prod extends AppCompatActivity {
         adapter_color = new ArrayAdapter<String>( this ,android.R.layout.simple_spinner_item , color );
         adapter_color.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        Bundle bundle = getIntent().getExtras();
 
+        if (bundle != null){
+            int im = bundle.getInt("Image");
+            image_adder_foto.setImageResource(im);
+            image_tovar = im;
+            ArrayList<Product> productss = (ArrayList<Product>)bundle.get("Catalog_list");
+
+        }
 
         sp_color.setAdapter(adapter_color);
 
@@ -92,13 +107,21 @@ public class Add_New_Prod extends AppCompatActivity {
             }
         };
 
+        but_add_foto.setOnClickListener(v -> {
+
+            Intent intent = new Intent( this , Foto_selectedActivity.class );
+            startActivity(intent);
+
+        });
 
         getBut_add_prod.setOnClickListener(view -> {
 
             String b = sp_size.getText().toString();
             System.out.println(b);
+            products = new ArrayList<Product>();
+            products.add(new Product(name , price , "dsfas" ,size_tovar ,  image_tovar ,description));
             Intent intent= new Intent(this , CatalogActivity.class);
-            intent.putExtra("New_product" ,  new Product(name , price , "dsfas" ,size_tovar ,  image_tovar ,description));
+            intent.putExtra("Catalog_list" ,  products);
             startActivity(intent);
             String v = sp_size.getText().toString();
             System.out.println(v);
@@ -107,6 +130,15 @@ public class Add_New_Prod extends AppCompatActivity {
 
 
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        System.out.println("  Staaart  ");
+
+
+    }
+
 
     private MultiSpinner.MultiSpinnerListener onSelectListener  =new MultiSpinner.MultiSpinnerListener(){
 

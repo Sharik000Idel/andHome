@@ -13,6 +13,7 @@ import com.example.idelproject_list.CastAdapter.CastRacyclerAdapter;
 import com.example.idelproject_list.moduls.Product;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CatalogActivity extends AppCompatActivity {
 
@@ -32,24 +33,11 @@ public class CatalogActivity extends AppCompatActivity {
 
 
         ArrayList<Product> products = new ArrayList<>();
-        products.add(  new Product( "Кепка"    , 20.2  , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер кепка"   ));
-        products.add(  new Product( "Футболка" , 120.2 , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Футболка"));
-        products.add(  new Product( "Майка"    , 100.2 , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Майка"   ));
-        products.add(  new Product( "Куртка"   , 520.2 , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Куртка"  ));
-        products.add(  new Product( "Шорты"    , 70.2  , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Шорты"   ));
-        products.add(  new Product( "Штаны"    , 240.2 , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Штаны"   ));
-        products.add(  new Product( "Кофта"    , 200.2 , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Кофта"   ));
-        products.add(  new Product( "Сумка"    , 40.2  , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Сумка"   ));
-        products.add(  new Product( "Очки"     , 10.2  , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Очки"    ));
-        products.add(  new Product( "Шуба"     , 1000.2, "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Шуба"    ));
-        products.add(  new Product( "Тапочки"  , 20.2  , "Black" , size_added(), R.drawable.idel_project_item1 , "Супер Тапочки" ));
 
         if (bundle != null) {
-            Object object = bundle.getSerializable("New_prod");
-            if (object instanceof Product){
-                Product new_Product = (Product) object;
-                products.add(new_Product);
-            }
+
+            Object object_list = bundle.get("Catalog_list");
+            products =  (ArrayList<Product>) object_list;
         }
         adapter = new CastRacyclerAdapter();
         adapter.setData(products);
@@ -59,9 +47,12 @@ public class CatalogActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(lln);
         recyclerView.setAdapter(adapter);
 
+        ArrayList<Product> finalProducts = products;
         b_add.setOnClickListener(view -> {
 
             Intent intent1 = new Intent( this , Add_New_Prod.class);
+            System.out.println( " dddd "+ finalProducts.size());
+            intent1.putExtra( "Catalog_list" , finalProducts);
             startActivity(intent1);
 
 

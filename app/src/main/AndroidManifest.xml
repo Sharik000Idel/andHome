@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IdelProject_list">
+        <activity android:name=".Foto_selectedActivity"></activity>
         <activity
             android:name=".Add_New_Prod"
             android:exported="false" />
